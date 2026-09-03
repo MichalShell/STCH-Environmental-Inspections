@@ -81,5 +81,105 @@
         "horsepower": 74.0,
         "tier": 3,
         "fuel": "Diesel"
+    },
+    {
+        "equipment": "Other Equipment",
+        "manufacturer": "123",
+        "model_number": "Test Model Number ",
+        "serial_number": "1",
+        "manufacture_date": "2026-08-02",
+        "tier": "12",
+        "fuel": "Diesel",
+        "horsepower": "49"
+    },
+    {
+        "equipment": "Lift Machine",
+        "manufacturer": "1256",
+        "model_number": "Test Model Number for lift Machine",
+        "serial_number": "GX-345",
+        "manufacture_date": "",
+        "tier": "",
+        "fuel": "Diesel",
+        "horsepower": "12"
+    },
+    {
+        "equipment": "Lift Machine",
+        "manufacturer": "Honda",
+        "model_number": "HONDA XCD1265",
+        "serial_number": "12345",
+        "manufacture_date": "2026-01-14",
+        "tier": "12",
+        "fuel": "Gasoline",
+        "horsepower": "1.24"
+    },
+    {
+        "equipment": "Lift Machine",
+        "manufacturer": "Bush",
+        "model_number": "BUSH -RT4509",
+        "serial_number": "123er5",
+        "manufacture_date": "2024-09-12",
+        "tier": "12",
+        "fuel": "Diesel",
+        "horsepower": "1.67"
+    },
+    {
+        "equipment": "Lift Machine",
+        "manufacturer": "JIP",
+        "model_number": "JIP-XCV345",
+        "serial_number": "123YT2",
+        "manufacture_date": "2026-12-12",
+        "tier": "13",
+        "fuel": "Diesel",
+        "horsepower": "12.8"
+    },
+    {
+        "equipment": "Lift Machine",
+        "manufacturer": "Fiat",
+        "model_number": "Fiat CV145",
+        "serial_number": "CDX3400098",
+        "manufacture_date": "2026-08-30",
+        "tier": "12",
+        "fuel": "Diesel",
+        "horsepower": "1.2"
+    },
+    {
+        "equipment": "Lift Machine",
+        "manufacturer": "Honda",
+        "model_number": "HONDA - XY12008",
+        "serial_number": "120098xtr",
+        "manufacture_date": "2023-03-12",
+        "tier": "12",
+        "fuel": "Diesel",
+        "horsepower": "12"
+    },
+    {
+        "equipment": "Chipper Machine",
+        "manufacturer": "Tesla",
+        "model_number": "Tesla",
+        "serial_number": "1234",
+        "manufacture_date": "2026-08-31",
+        "tier": "12",
+        "fuel": "Diesel",
+        "horsepower": "12"
+    },
+    {
+        "equipment": " Main Machine",
+        "manufacturer": "BMW",
+        "model_number": "BMW",
+        "serial_number": "Tiggo-450",
+        "manufacture_date": "2026-06-10",
+        "tier": "12",
+        "fuel": "Diesel",
+        "horsepower": "12"
+    },
+    {
+        "equipment": "Main Machine",
+        "manufacturer": "Nissan",
+        "model_number": "Nissan Sentra",
+        "serial_number": "SX1-098",
+        "manufacture_date": "2026-08-05",
+        "tier": "12",
+        "fuel": "Diesel",
+        "horsepower": "12"
     }
 ]

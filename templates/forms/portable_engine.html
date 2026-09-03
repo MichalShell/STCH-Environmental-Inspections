@@ -1,288 +1,219 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portable Engine Log</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title> /</title>
 
+  <style>
+    html { visibility: hidden; }
 
-
-<style>
-html { visibility: hidden; }
-</style>
-
-
-<script>
-(function () {
-    const nav = performance.getEntriesByType("navigation")[0];
-
-    if (nav && nav.type === "back_forward") {
-        window.location.replace("/");
-    } else {
-        document.documentElement.style.visibility = "visible";
+    /* Keeps a select + its "Other" text box together in column 2,
+       so hiding either one never shifts the layout. */
+    .input-row .field-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
     }
-})();
-</script>
-    
+    .input-row .field-stack > select,
+    .input-row .field-stack > input {
+      width: 100%;
+      margin-top: 0;
+    }
+  </style>
 
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
-    <script src="{{ url_for('static', filename='js/date_validation.js') }}"></script>
-    <script src="{{ url_for('static', filename='js/components/date_auto_fill.js') }}"></script>
-    <script src="{{ url_for('static', filename='js/portable_engine.js') }}"></script>
-    <script src="{{ url_for('static', filename='js/components/submit_disable_btn.js')}}" defer></script>
-    <script src="{{ url_for('static', filename='js/components/other_input.js')}}" defer></script>
+  <script>
+    (function () {
+      const nav = performance.getEntriesByType("navigation")[0];
+      if (nav && nav.type === "back_forward") {
+        window.location.replace("/");
+      } else {
+        document.documentElement.style.visibility = "visible";
+      }
+    })();
+  </script>
 
-
-    
-
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
+  <script src="{{ url_for('static', filename='js/date_validation.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/components/date_auto_fill.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/portable_engine.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/components/submit_disable_btn.js')}}" defer></script>
+  <script src="{{ url_for('static', filename='js/components/other_input.js')}}" defer></script>
 </head>
 
 <body>
-
-<form method="POST" action="/portable_engine" autocomplete="off" id="form">
-
+  <form method="POST" action="/portable_engine" autocomplete="off" id="form">
     <h1 class="form-title">Portable Engine Log</h1>
-     <br>
- 
-     <div class="input-row">
-        <label>Operator*</label>
-        <input type="text" name="operator" required>
-    </div>
-    <div class="input-row">
-
-            <label>Equipment</label>
-            
-<select id="equipment" name="equipment" class="has-other">
-    <option disabled selected>Select Equipment</option>
-</select>
-    <label></label>
-            <input type="text"
-           name="other_equipment"
-           id = "other_equipment"
-           class="other-input"
-           placeholder="Enter equipment"
-           style="display:none; margin-top:6px;">
-
-    </div>
-
-
-    <div class="input-row">
-        <label>Location</label>
-        <select id="location"name="location">
-            <option disabled selected hidden></option>
-            <option value="Between MS and MP Courtyard">Between MS and MP Courtyard</option>
-            <option value="Blue and Orange parking lot">Blue and Orange parking lot</option>
-            <option value="Blue Parking Lot">Blue Parking Lot</option>
-            <option value="Building CG">Building CG</option>
-            <option value="Building MB">Building MB</option>
-            <option value="Building MD">Building MD</option>
-            <option value="Building MM">Building MM</option>
-            <option value="Building N Courtyard">Building N Courtyard</option>
-            <option value="Building R">Building R</option>
-            <option value="Building SS">Building SS</option>
-            <option value="Buildings SR and BD">Buildings SR and BD</option>
-            <option value="Event Parking Lot">Event Parking Lot</option>
-            <option value="Gate 2">Gate 2</option>
-            <option value="In">In</option>
-            <option value="MP and MS Courtyard">MP and MS Courtyard</option>
-            <option value="N Courtyard">N Courtyard</option>
-            <option value="Orange Parking Lot">Orange Parking Lot</option>
-            <option value="Purple Zone">Purple Zone</option>
-            <option value="Red Mustered Point">Red Mustered Point</option>
-            <option value="Red Parking Lot">Red Parking Lot</option>
-            <option value="Road A">Road A</option>
-            <option value="Road H and Butterfly Field">Road H and Butterfly Field</option>
-            <option value="Road H and Orange parking lot">Road H and Orange parking lot</option>
-            <option value="T Courtyard">T Courtyard</option>
-            <option value="Yellow Mustered Point">Yellow Mustered Point</option>
-        </select>
-    </div>
-
-
-    <div class="input-row">
-        <label>Purpose</label>
-        <select id="purpose"name="purpose" class="has-other">
-            <option disabled selected hidden>Select Purpose</option>
-            <option value="Tree Removal">Tree Removal</option>
-            <option value="Tree Trimming">Tree Trimming</option>
-            <option value="Tree Work">Tree Work</option>
-            <option value="Other">Other</option>
-        </select>
-        <label></label>
-            <input type="text"
-           name="other_purpose"
-           id = "other_purpose"
-           class="other-input"
-           placeholder="Enter purpose"
-           style="display:none; margin-top:6px;">
-    </div>
-
-<div class="sub-header">Service Hours and Meter Readings</div>
-
-    <div class="input-row">
-        <label>Arrival Date</label>
-        <input type="date" id="arrivalDate" name="arrivalDate">
-    </div>
-
-    <div class="input-row">
-        <label>In Service Date</label>
-        <input type="date" id="date" name="date">
-    </div>
-
-    <div class="input-row">
-        <label>Initial Meter Read</label>
-        <input type="number" min="0" step="0.01" id="initialMeterRead" name="initialMeterRead">
-    </div>
-
-    <div class="input-row">
-        <label>Departure Date</label>
-        <input type="date" id="departureDate" name="departureDate">
-    </div>
-
-    <div class="input-row">
-        <label>Final Meter Read</label>
-        <input type="number" min="0" step="0.01" id="finalMeterRead" name="finalMeterRead">
-    </div>
-
-    <div class="input-row">
-        <label>Total Hours</label>
-        <input type="number" id="total_time" name="totalHours" step="0.01" readonly class="readonly-field">
-    </div>
-    
-
-<div class="sub-header">Engine Data</div>
-
-  <div class="input-row">
-        <label>Model Number</label>
-       <!-- <select id="modelNumber"name="modelNumber">
-            <option disabled selected hidden></option>
-            <option value="600AJ">600AJ</option>
-            <option value="60-J">60-J</option>
-            <option value="660SJ">660SJ</option>
-            <option value="BC1000XL">BC1000XL</option>
-            <option value="SJ66T+">SJ66T+</option>
-        </select>-->
-        
-
-
-
-    <!-- ✅ Dropdown (normal mode) -->
-    <select id="modelNumber" name="modelNumber">
-        <option disabled selected hidden>Select Model</option>
-    </select>
-
-    <!-- ✅ Input (Other mode) -->
-    <input type="text"
-           id="modelNumberInput"
-           name="modelNumberOther"
-           placeholder="Enter model number"
-           style="display:none; margin-top:6px;">
-
-    </div>
-
-        <div class="input-row">
-        <label>Horsepower</label>
-        <!--
-        <select id="horsepower"name="horsepower">
-            <option value="0" selected>0</option> this will help us not have an empty in power automate as well
-            <option value="36.4">36.4</option>
-            <option value="44.0">44.0</option>
-            <option value="48.8">48.8</option>
-            <option value="49.0">49.0</option>
-            <option value="74.0">74.0</option>
-            <option value="145.0">145.0</option>
-            <option value="74.0">74.0</option>
-        </select>
-    -->
-        <input type="text"
-       id="horsepowerInput"
-       name="horsepower"
-       placeholder="Enter horsepower"
-       >
-
- 
-    </div>
-
-    <div class="input-row">
-        <label>Manufacturer</label>
-       <!-- <select id="manufacturer"name="manufacturer">
-            <option disabled selected hidden></option>
-            <option value="JLG">JLG</option>
-            <option value="JLG Lift">JLG Lift</option>
-            <option value="MEC">MEC</option>
-            <option value="Morbark, LLC">Morbark, LLC</option>
-            <option value=Skyjack>Skyjack</option>
-            <option value="Vermeer">Vermeer</option>
-        </select> -->
-
-        <input type="text"
-       id="manufacturerInput"
-       name="manufacturer"
-       placeholder="Enter manufacturer">
-
-  
-    </div>
-
-  
-
-    <div class="input-row">
-        <label>Serial Number</label>
-        <input type="text" name="serialNumber">
-    </div>
-
-        <div class="input-row">
-        <label>Manufacture Date</label>
-        <input type="date" id="manufactureDate" name="manufactureDate">
-    </div>
-
-
-    <div class="input-row">
-        <label>Tier</label>
-       <!-- <select id="tier"name="tier">
-            <option disabled selected hidden></option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-        </select> -->
-         <input type="text"
-       id="TierInput"
-       name="tier"
-       placeholder="Enter tier">
-
-    </div>
-
-
-    <div class="input-row">
-        <label>Fuel</label>
-        <select id="fuelInput"name="fuel">
-            <option disabled selected hidden></option>
-            <option value="Diesel">Diesel</option>
-            <option value="Gasoline">Gasoline</option>
-        </select> 
-    
-    </div>
-
-
-    <div class="input-row">
-        <label>On-Site Status</label>
-        <select id="onsiteStatus" name="onsiteStatus">
-            <option disabled selected hidden></option>
-            <option value="Off-Site">Off-Site</option>
-            <option value="On-Site">On-Site</option>
-        </select>
-    </div>
-        <div class="sub-header">Comments</div>
     <br>
-    
 
- <div class="input-row full-width">
-        <!-- <label>Comments:</label> -->
-        <textarea name="comments" placeholder="Comments"></textarea>
+    <div class="input-row">
+      <label>Operator*</label>
+      <input type="text" name="operator" required>
+    </div>
+
+    <div class="input-row">
+      <label>Contractor*</label>
+      <input type="text" name="contractor" required>
+    </div>
+
+    <div class="input-row">
+      <label for="equipment">Equipment</label>
+      <div class="field-stack">
+        <select id="equipment" name="equipment" class="has-other">
+          <option disabled selected>Select Equipment</option>
+        </select>
+        <input type="text" name="other_equipment" id="other_equipment" class="other-input"
+               placeholder="Enter equipment" style="display:none;">
+      </div>
+    </div>
+
+    <div class="input-row">
+      <label for="location">Location</label>
+      <select id="location" name="location">
+        <option disabled selected hidden></option>
+        <option value="Between MS and MP Courtyard">Between MS and MP Courtyard</option>
+        <option value="Blue and Orange parking lot">Blue and Orange parking lot</option>
+        <option value="Blue Parking Lot">Blue Parking Lot</option>
+        <option value="Building CG">Building CG</option>
+        <option value="Building MB">Building MB</option>
+        <option value="Building MD">Building MD</option>
+        <option value="Building MM">Building MM</option>
+        <option value="Building N Courtyard">Building N Courtyard</option>
+        <option value="Building R">Building R</option>
+        <option value="Building SS">Building SS</option>
+        <option value="Buildings SR and BD">Buildings SR and BD</option>
+        <option value="Event Parking Lot">Event Parking Lot</option>
+        <option value="Gate 2">Gate 2</option>
+        <option value="In">In</option>
+        <option value="MP and MS Courtyard">MP and MS Courtyard</option>
+        <option value="N Courtyard">N Courtyard</option>
+        <option value="Orange Parking Lot">Orange Parking Lot</option>
+        <option value="Purple Zone">Purple Zone</option>
+        <option value="Red Mustered Point">Red Mustered Point</option>
+        <option value="Red Parking Lot">Red Parking Lot</option>
+        <option value="Road A">Road A</option>
+        <option value="Road H and Butterfly Field">Road H and Butterfly Field</option>
+        <option value="Road H and Orange parking lot">Road H and Orange parking lot</option>
+        <option value="T Courtyard">T Courtyard</option>
+        <option value="Yellow Mustered Point">Yellow Mustered Point</option>
+      </select>
+    </div>
+
+    <div class="input-row">
+      <label for="purpose">Purpose</label>
+      <div class="field-stack">
+        <select id="purpose" name="purpose" class="has-other">
+          <option disabled selected hidden>Select Purpose</option>
+          <option value="Tree Removal">Tree Removal</option>
+          <option value="Tree Trimming">Tree Trimming</option>
+          <option value="Tree Work">Tree Work</option>
+          <option value="Other">Other</option>
+        </select>
+        <input type="text" name="other_purpose" id="other_purpose" class="other-input"
+               placeholder="Enter purpose" style="display:none;">
+      </div>
+    </div>
+
+    <div class="sub-header">Service Hours and Meter Readings</div>
+
+    <div class="input-row">
+      <label for="arrivalDate">Arrival Date</label>
+      <input type="date" id="arrivalDate" name="arrivalDate">
+    </div>
+
+    <div class="input-row">
+      <label for="date">In Service Date</label>
+      <input type="date" id="date" name="date">
+    </div>
+
+    <div class="input-row">
+      <label for="initialMeterRead">Initial Meter Read*</label>
+      <input type="number" required min="0" step="0.01" id="initialMeterRead" name="initialMeterRead">
+    </div>
+
+    <div class="input-row">
+      <label for="departureDate">Departure Date</label>
+      <input type="date" id="departureDate" name="departureDate">
+    </div>
+
+    <div class="input-row">
+      <label for="finalMeterRead">Final Meter Read*</label>
+      <input type="number" required min="0" step="0.01" id="finalMeterRead" name="finalMeterRead">
+    </div>
+
+    <div class="input-row">
+      <label for="total_time">Total Hours</label>
+      <input type="number" id="total_time" name="totalHours" step="0.01" readonly class="readonly-field">
+    </div>
+
+    <div class="sub-header">Engine Data</div>
+
+    <div class="input-row">
+      <label for="modelNumber">Model Number*</label>
+      <div class="field-stack">
+        <select id="modelNumber" name="modelNumber" required>
+          <option disabled selected hidden>Select Model</option>
+        </select>
+        <input type="text" id="modelNumberInput" name="modelNumberOther"
+               placeholder="Enter model number" style="display:none;">
+
+    
+      </div>
+    </div>
+
+    <div class="input-row">
+      <label for="horsepowerInput">Horsepower*</label>
+      <input type="text" id="horsepowerInput" name="horsepower" placeholder="Enter horsepower" required>
+    </div>
+
+    <div class="input-row">
+      <label for="manufacturerInput">Manufacturer</label>
+      <input type="text" id="manufacturerInput" name="manufacturer" placeholder="Enter manufacturer">
+    </div>
+
+    <div class="input-row">
+      <label>Serial Number*</label>
+      <input type="text" name="serialNumber" required >
+    </div>
+
+    <div class="input-row">
+      <label for="manufactureDate">Manufacture Date</label>
+      <input type="date" id="manufactureDate" name="manufactureDate">
+    </div>
+
+    <div class="input-row">
+      <label for="TierInput">Tier</label>
+      <input type="text" id="TierInput" name="tier" placeholder="Enter tier">
+    </div>
+
+    <div class="input-row">
+      <label for="fuelInput">Fuel*</label>
+      <select id="fuelInput" name="fuel" required>
+        <option disabled selected hidden></option>
+        <option value="Diesel">Diesel</option>
+        <option value="Gasoline">Gasoline</option>
+      </select>
+    </div>
+
+    <div class="input-row">
+      <label for="onsiteStatus">On-Site Status</label>
+      <select id="onsiteStatus" name="onsiteStatus">
+        <option disabled selected hidden></option>
+        <option value="Off-Site">Off-Site</option>
+        <option value="On-Site">On-Site</option>
+      </select>
+    </div>
+
+    <div class="sub-header">Comments</div>
+    <br>
+
+    <div class="input-row full-width">
+      <textarea name="comments" placeholder="Comments"></textarea>
     </div>
 
     <br>
     <button type="submit" id="submitBtn">Submit</button>
-    <div class="button">
-    <a href="/home">Cancel</a></div>
-</form>
-
+    <div class="button"><a href="/home">Cancel</a></div>
+  </form>
 </body>
+</html>

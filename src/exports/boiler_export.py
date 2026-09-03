@@ -12,7 +12,7 @@ def generate_boilerExcel(form_data):
 
     # ✅ Define consistent column order
     columns = [
-        "Operator", "Boiler Number","Boiler Status", "Date", "Time", "Water Level",
+        "Operator","Boiler Number","Boiler Status", "Date", "Time", "Water Level",
         "Blow Down Water Column", "Blow Down Sight Glass", "Blow Down Low Water Cut Out",
         "Bottom Blow Boiler",
         "Checked Burner Ring For Proper Flame Pattern", "Checked Excess Oxygen For Proper Level",

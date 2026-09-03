@@ -41,15 +41,16 @@ def save_new_engine(form_data):
 
 
 def save_new_model(form_data):
-    """Append a new engine entry when the user selects 'Other'."""
+    """
+    Save a new model under an existing equipment.
+    """
+
     inventory = load_engine_inventory()
 
-    model_value = form_data.get("other_model") or form_data.get("model")
-
     new_entry = {
-        "equipment": form_data.get("equipment"),
+        "equipment": form_data.get("equipment"),  # from top dropdown
         "manufacturer": form_data.get("manufacturer"),
-        "model_number": model_value,
+        "model_number": form_data.get("modelNumber"),  # modelNumberOther was copied here
         "serial_number": form_data.get("serialNumber"),
         "manufacture_date": form_data.get("manufactureDate"),
         "tier": form_data.get("tier"),
@@ -57,12 +58,25 @@ def save_new_model(form_data):
         "horsepower": form_data.get("horsepower")
     }
 
-    print("✅ Saving new engine:", new_entry)
+    existing = next(
+        (
+            item
+            for item in inventory
+            if item.get("equipment") == new_entry["equipment"]
+            and item.get("model_number") == new_entry["model_number"]
+        ),
+        None
+    )
+
+    if existing:
+        print("✅ Model already exists")
+        return existing
 
     inventory.append(new_entry)
 
     with open(DATA_FILE, "w") as f:
         json.dump(inventory, f, indent=4)
 
-    print("✅ Engine saved to:", DATA_FILE)
+    print("✅ New model saved:", new_entry)
+
     return new_entry

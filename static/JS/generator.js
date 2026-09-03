@@ -125,39 +125,20 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 
+const runReason = document.getElementById("run_reason");
+const emergencyTypeContainer = document.getElementById("emergencyTypeContainer");
+const emergencyTypeSelect = document.querySelector(
+    'select[name="emergency_type"]'
+);
 
-
-
-
-
-
-
-
-    /// Display comment field only if visible emissions selected to Yes///
-/*
-    
-function checkEmissions(selectElement) {
-    const container = selectElement.closest(".input-row").parentElement;
-    const commentRow = container.querySelector("visibleEmissionComment");
-
-    const isYes = selectElement.value === "Yes";
-
-    commentRow.style.display = isYes ? "block" : "none";
-
-    const input = commentRow.querySelector("input");
-    input.required = isYes;
-
-    if (!isYes) input.value = "";
-}
-
-
-const emissionsSelect = document.getElementById("emissions");
-
-emissionsSelect.addEventListener("change", function () {
-    checkEmissions(this);
+runReason.addEventListener("change", function () {
+    if (this.value === "Emergency") {
+        emergencyTypeContainer.style.display = "grid"; // or "flex" depending on your layout
+        emergencyTypeSelect.required = true;
+    } else {
+        emergencyTypeContainer.style.display = "none";
+        emergencyTypeSelect.required = false;
+        emergencyTypeSelect.value = "";
+    }
 });
 
-*/
-
-
-  

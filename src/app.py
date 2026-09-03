@@ -8,7 +8,7 @@ from exports.generator_export import generate_generatorExcel
 from utilities.email_utils import send_email
 from utilities.response_utils import render_with_no_cache
 from utilities.materials_utils import add_material, load_materials
-from utilities.portable_engine_utils import load_engine_inventory, save_new_engine
+from utilities.portable_engine_utils import load_engine_inventory, save_new_engine,save_new_model
 import json
 import os
 import datetime
@@ -192,7 +192,9 @@ def portableEngine():
 
     if request.method == "POST":
 
-        model_number = request.form.get("modelNumber") or request.form.get("modelNumberOther")
+        model_choice=request.form.get("modelNumber")
+        model_number=request.form.get("modelNumberOther")
+        #equipment_choice=request.form.get("equipment")
         # converts user inputs into python dictionary
         form_data = request.form.to_dict()
         
@@ -209,9 +211,19 @@ def portableEngine():
     # Save the custom engine entry only when the user selected "Other".
         if request.form.get("equipment") == "Other":
             save_new_engine(form_data)
+            print("Final model number:", model_number)
+        elif model_choice== "OTHER":
+            save_new_model(form_data)
+            print("Final model number:", model_number)
 
-        print("Final model number:", model_number)
-
+        
+        is_other_model = (model_choice=="OTHER") 
+        if is_other_model:
+            form_data["modelNumber"]="Other"
+            form_data["modelNumberOther"]=model_number
+        else :
+            form_data["modelNumberOther"]=""
+        
 
         # ✅ Generate Excel
         print("Generating Excel with form data:", form_data)

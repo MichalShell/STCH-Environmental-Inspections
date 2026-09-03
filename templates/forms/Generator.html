@@ -48,9 +48,9 @@ html { visibility: hidden; }
         <input type="text" name="inspector" required>
     </div>
     <div class="input-row">
-            <label>Vendor</label>
+            <label>Contractor*</label>
             <select name="vendor" class="has-other">
-                <option disabled selected>Select vendor</option>
+                <option disabled selected>Select Contractor</option>
                 <option value="B&R">B&R</option>
                 <option value="Other" >Other</option>
             </select>
@@ -59,10 +59,16 @@ html { visibility: hidden; }
            name="other_vendor"
            class="other-input"
            id = "other_vendor"
-           placeholder="Enter vendor name"
+           placeholder="Enter Contractor name"
            style="display:none; margin-top:6px;">
 
     </div>
+
+     <!-- <div class="input-row">
+      <label>Contractor*</label>
+      <input type="text" name="contractor" required>
+    </div> -->
+
     <div class="input-row">
         <label>Generator</label>
         <select id="generator"name="generator">
@@ -120,7 +126,7 @@ html { visibility: hidden; }
       
 <div class="input-row">
     <label>Run Reason*</label>
-        <select name="run_reason" class="has-other" required>
+        <select  id= "run_reason" name="run_reason" class="has-other" required>
             <option value="" disabled selected hidden></option>
             <option value="Test">Test</option>
             <option value="Emergency">Emergency</option>
@@ -135,6 +141,25 @@ html { visibility: hidden; }
            style="display:none; margin-top:6px;">
         
     </div>
+
+    <div class="input-row" id="emergencyTypeContainer" style="display:none;">
+    <label>Emergency type*</label>
+        <select name="emergency_type" class="has-other" >
+            <option value="" disabled selected hidden></option>
+            <option value="Fire">Fire</option>
+            <option value="Emergency">Emergency</option>
+            <option value="Other">Other</option>
+        </select>
+        <label></label>
+         <input type="text"
+           name="other_emergency_type"
+           class="other-input"
+           id = "other_emergency_type"
+           placeholder="Enter Emergency type"
+           style="display:none; margin-top:6px;">
+    </div>
+
+
 
         <div class="sub-header">Comments</div>
     <br>

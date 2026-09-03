@@ -8,8 +8,8 @@ def generate_generatorExcel(form_data):
     print(form_data)
     # ✅ Define consistent column order (important!)
     columns = [
-       "Inspector Name", "Vendor", "Generator", "Date", "Start Time", "Stop Time", "Run Duration",
-       "Run Reason" ,"Comments", "Visible Emissions","Comment Visible Emissions"
+       "Inspector Name","Contractor","Generator", "Date", "Start Time", "Stop Time", "Run Duration",
+       "Run Reason" ,"Emergency Type","Comments", "Visible Emissions","Comment Visible Emissions"
     ]
 
     vendor = form_data.get("vendor")
@@ -21,10 +21,7 @@ def generate_generatorExcel(form_data):
 
     if run_reason == "Other":
         run_reason = form_data.get("other_run_reason") or "Other"
-
-    run_duration = form_data.get("run_duration")
-
-    
+ 
     run_duration = form_data.get("run_duration")
 
     if run_duration:
@@ -32,6 +29,12 @@ def generate_generatorExcel(form_data):
         total_hours = hours + (minutes / 60)
     else:
         total_hours = 0
+
+    Emergency_type=form_data.get("emergency_type")
+
+    if Emergency_type=="Other":
+        Emergency_type = form_data.get("other_emergency_type") or "Other"
+
 
 #  round to 2 decimal places
     total_hours = round(total_hours, 2)
@@ -43,13 +46,15 @@ def generate_generatorExcel(form_data):
     # ✅ Convert incoming form data keys to match column names
     data = {
         "Inspector Name": form_data.get("inspector"),
-        "Vendor": vendor,
+        # "Contractor":form_data.get("contractor"),
+        "Contractor": vendor,
         "Generator": form_data.get("generator"),
         "Date": form_data.get("date"),
         "Start Time": form_data.get("start_time"),
         "Stop Time": form_data.get("stop_time"),
         "Run Duration": total_hours,
         "Run Reason": run_reason,
+        "Emergency Type":Emergency_type,
         "Comments": form_data.get("comments"),
         "Visible Emissions": form_data.get("emissions"),
         "Comment Visible Emissions": form_data.get("visibleEmissionComment")
